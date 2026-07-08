@@ -1,13 +1,14 @@
 import express from "express";
+import healthRouter from "./routes/health.routes.js";
 
 const app = express();
+
+app.use(express.json());
 
 app.get("/", (req, res) => {
     res.redirect("/health");
 })
 
-app.get("/health", (req, res) => {
-    res.status(200).json({message : "Server running properly"});
-});
+app.use("/health", healthRouter);
 
 export default app;
