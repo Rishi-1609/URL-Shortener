@@ -8,3 +8,10 @@ export const createUrlSchema = z.object({
 })
 
 export type CreateUrlRequest = z.infer<typeof createUrlSchema>;
+
+
+export const getShortCodeParamsSchema = z.object({
+    shortCode : z.string().trim().min(1),
+});
+
+export type GetShortCodeRequest = z.infer<typeof getShortCodeParamsSchema>;

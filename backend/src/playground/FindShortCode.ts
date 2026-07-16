@@ -1,4 +1,4 @@
-import { dbFind, dbInsert } from "../repository/urls.repository.js";
+import { dbFind, dbInsert } from "../api/v1/urls/urls.repository.js";
 
 const exist = await dbFind("ABCDEFGH");
 console.log(exist);

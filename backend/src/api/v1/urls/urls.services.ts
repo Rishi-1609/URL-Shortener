@@ -1,8 +1,15 @@
-import { dbFind, dbInsert } from "../repository/urls.repository.js";
-import { generateId } from "../utils/generateId.js";
-import { generateShortCode } from "../utils/generateShortCode.js";
-import { generateShortUrl } from "../utils/generateShortUrl.js";
-import { CreateUrlRequest } from "../validators/urls.validator.js";
+import { dbFind, dbGetOriginalUrl, dbInsert } from "./urls.repository.js";
+import { generateId } from "./utils/generateId.js";
+import { generateShortCode } from "./utils/generateShortCode.js";
+import { generateShortUrl } from "./utils/generateShortUrl.js";
+import { CreateUrlRequest } from "./urls.validator.js";
+
+
+export async function getOriginalUrl(shortCode : string) : Promise<string | null> {
+    const data = await dbGetOriginalUrl(shortCode);
+    if (!data) return null;
+    return data.originalUrl;
+}
 
 
 export async function createShortUrl(data : CreateUrlRequest) {

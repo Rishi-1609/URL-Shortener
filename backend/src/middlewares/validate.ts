@@ -9,7 +9,7 @@ const createParser = <T extends z.ZodType>(schema : T) => {
 }
 
 
-export function validate <T extends z.ZodType>(schema : T) {
+export function validateBody <T extends z.ZodType>(schema : T) {
     const parser = createParser(schema);
     return (req : Request, res : Response, next : NextFunction) => {
         const parsed = parser(req.body);
@@ -19,4 +19,17 @@ export function validate <T extends z.ZodType>(schema : T) {
         req.body = parsed.data;
         next();
     };
+}
+
+
+export function validatePath <T extends z.ZodType>(schema : T) {
+    const parser = createParser(schema);
+    return (req : Request, res : Response, next: NextFunction) => {
+        const parsed = parser(req.params);
+        if (!parsed.success) {
+            return res.status(400).json(parsed);
+        }
+        req.params = parsed.data as Request['params'];
+        next();
+    }
 }

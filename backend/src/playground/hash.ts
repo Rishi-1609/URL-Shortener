@@ -1,4 +1,4 @@
-import { generateHashedString } from "../utils/generateHashedString.js";
+import { generateHashedString } from "../api/v1/urls/utils/generateHashedString.js";
 
 console.log(generateHashedString("hello"));
 console.log(generateHashedString("hello"));
